@@ -1,8 +1,13 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 class Post(models.Model):
+    class Status(models.TextChoices):
+        DRAFT = ('DF', 'Draft')
+        PUBLISHED = ('PB', 'Published')
+
     title = models.CharField(
         max_length=250,
     )
@@ -11,6 +16,16 @@ class Post(models.Model):
         allow_unicode=True,
     )
     body = models.TextField()
+    author = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        related_name='blog_posts', # default: post_set
+    )
+    status = models.CharField(
+        max_length=2,
+        choices=Status.choices,
+        default=Status.DRAFT,
+    )
     publish = models.DateTimeField(
         default=timezone.now,
     )
