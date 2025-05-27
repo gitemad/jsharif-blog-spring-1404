@@ -19,4 +19,5 @@ My Blog
         {{ post.body|truncatewords:30|linebreaks }}
     </p>
 {% endfor %}
+{% include 'pagination.html' with page=posts %}
 {% endblock %}
