@@ -12,4 +12,9 @@
 <p>
     {{ post.body|linebreaks }}
 </p>
+<div>
+    <a href="{% url 'blog:post_share' post.id %}">
+        Share this post
+    </a>
+</div>
 {% endblock  %}
