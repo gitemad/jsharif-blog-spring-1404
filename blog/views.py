@@ -69,7 +69,6 @@ def post_detail(request, year, month, day, slug):
     similar_posts = similar_posts.annotate(
         same_tags=Count('tags')
     ).order_by('-same_tags', '-publish')[:3]
-    print(similar_posts.query)
     
     return render(
         request,
